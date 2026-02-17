@@ -20,10 +20,22 @@ function App() {
     }
   }, [view]);
 
-  const handleUploadStart = (profile = "aarav") => {
-    const mockData =
-      profile === "vikram" ? MOCK_API_RESPONSE_VIKRAM : MOCK_API_RESPONSE_AARAV;
-    setResults(mockData);
+  const handleUploadStart = (profileOrData = "aarav") => {
+    let dataToProcess;
+
+    // Check if it's an object (uploaded data) or string (mock profile)
+    if (typeof profileOrData === "object" && profileOrData !== null) {
+      dataToProcess = profileOrData;
+    } else {
+      dataToProcess =
+        profileOrData === "vikram"
+          ? MOCK_API_RESPONSE_VIKRAM
+          : MOCK_API_RESPONSE_AARAV;
+    }
+
+    console.log(dataToProcess);
+
+    setResults(dataToProcess);
     setView("processing");
   };
 

@@ -18,7 +18,10 @@ export default function ResultsView({ data }) {
 
   // Typewriter effect for AI Narrative
   useEffect(() => {
-    const narrativeText = data.ai_narrative.replace(/<strong>|<\/strong>/g, "");
+    const narrativeText = (data.ai_narrative || "").replace(
+      /<strong>|<\/strong>/g,
+      "",
+    );
     let index = 0;
 
     const interval = setInterval(() => {
@@ -33,11 +36,28 @@ export default function ResultsView({ data }) {
     return () => clearInterval(interval);
   }, [data.ai_narrative]);
 
-  const scoreColor = data.score > 75 ? "text-green-400" : "text-red-400";
+  const scoreColor = (data.score || 0) > 75 ? "text-green-400" : "text-red-400";
   const statusColor =
-    data.status === "APPROVED"
+    (data.status || "").toUpperCase() === "APPROVED"
       ? "bg-green-500/20 border-green-500/50 text-green-400"
-      : "bg-red-500/20 border-red-500/50 text-red-400";
+      : (data.status || "").toUpperCase() === "REJECTED"
+        ? "bg-red-500/20 border-red-500/50 text-red-400"
+        : "bg-yellow-500/20 border-yellow-500/50 text-yellow-400";
+
+  // Safety checks for data structure
+  if (!data || !data.twin_profile || !data.scenarios) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <p className="text-red-400 text-lg">Error loading results</p>
+          <p className="text-slate-400 text-sm">Invalid data structure</p>
+        </div>
+      </div>
+    );
+  }
+
+  const twinProfile = data.twin_profile || {};
+  const scenarios = data.scenarios || [];
 
   return (
     <div className="grid grid-cols-3 gap-6 p-8 max-w-7xl mx-auto">
@@ -49,7 +69,12 @@ export default function ResultsView({ data }) {
             <h3 className="text-xl font-bold text-slate-100 mb-2">
               Digital Twin DNA
             </h3>
-            <p className="text-xs text-slate-400">{data.twin_profile.name}</p>
+            <p className="text-xs text-slate-400">
+              {data.application_id || "ID"}
+            </p>
+            <p className="text-xs text-slate-400">
+              {data.name || "Profile Name"}
+            </p>
           </div>
 
           <div className="space-y-4">
@@ -59,14 +84,14 @@ export default function ResultsView({ data }) {
                 ARCHETYPE
               </p>
               <div className="px-3 py-1 bg-purple-500/20 border border-purple-500/50 rounded text-purple-400 text-xs font-medium">
-                {data.twin_profile.archetype}
+                {twinProfile.archetype || "Unknown"}
               </div>
             </div>
 
             {/* Liquidity */}
             <Stat
               label="Liquidity Buffer"
-              value={`${data.twin_profile.liquidity_buffer} mo`}
+              value={`${twinProfile.liquidity_buffer || 0} mo`}
               icon={Droplet}
               color="text-cyan-400"
             />
@@ -74,7 +99,7 @@ export default function ResultsView({ data }) {
             {/* Spending Elasticity */}
             <Stat
               label="Spending Elasticity"
-              value={`${data.twin_profile.spending_elasticity.toFixed(2)}`}
+              value={`${(twinProfile.spending_elasticity || 0).toFixed(2)}`}
               icon={TrendingUp}
               color="text-green-400"
             />
@@ -82,7 +107,7 @@ export default function ResultsView({ data }) {
             {/* Burn Rate */}
             <Stat
               label="Monthly Burn Rate"
-              value={`₹${(data.twin_profile.burn_rate / 1000).toFixed(0)}k`}
+              value={`₹${((twinProfile.burn_rate || 0) / 1000).toFixed(0)}k`}
               icon={Zap}
               color="text-yellow-400"
             />
@@ -109,16 +134,18 @@ export default function ResultsView({ data }) {
             <p className="text-slate-400 text-sm font-medium">
               Credit Resilience Score
             </p>
-            <p className={`text-6xl font-bold ${scoreColor}`}>{data.score}</p>
+            <p className={`text-6xl font-bold ${scoreColor}`}>
+              {data.score || 0}
+            </p>
             <p className="text-slate-500 text-sm">/100</p>
             <p className="text-xs text-slate-400 mt-2">
-              {data.twin_profile.recommendation}
+              {twinProfile.recommendation || "Assessment complete"}
             </p>
           </div>
           <div
             className={`px-6 py-3 border rounded-lg ${statusColor} font-bold text-lg`}
           >
-            {data.status}
+            {(data.status || "PENDING").toUpperCase()}
           </div>
         </Card>
 
@@ -128,7 +155,7 @@ export default function ResultsView({ data }) {
             Scenario Analysis
           </h3>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data.scenarios}>
+            <BarChart data={scenarios}>
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
               <XAxis dataKey="name" stroke="#94a3b8" tick={{ fontSize: 12 }} />
               <YAxis
@@ -147,10 +174,12 @@ export default function ResultsView({ data }) {
                 }}
               />
               <Bar dataKey="survival_rate" isAnimationActive={true}>
-                {data.scenarios.map((entry, index) => (
+                {scenarios.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={entry.survival_rate < 70 ? "#ef4444" : "#3b82f6"}
+                    fill={
+                      (entry.survival_rate || 0) < 70 ? "#ef4444" : "#3b82f6"
+                    }
                   />
                 ))}
               </Bar>

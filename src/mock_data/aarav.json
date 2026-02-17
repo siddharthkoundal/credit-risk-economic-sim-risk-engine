@@ -1,0 +1,45 @@
+{
+  "application_id": "APP_8821_BLR",
+  "applicant_details": {
+    "name": "Aarav Sharma",
+    "age": 24,
+    "city_tier": "Tier_1",
+    "job_title": "Freelance Full-Stack Developer",
+    "stated_monthly_income": 100000,
+    "housing_status": "Renting_Shared",
+    "education": "B.Tech_Tier_2"
+  },
+  "bureau_data": {
+    "credit_score": 680,
+    "total_revolving_limit": 200000,
+    "current_revolving_balance": 140000,
+    "utilization_ratio": 0.70,
+    "total_monthly_emi_obligations": 0,
+    "payment_history": {
+      "avg_payment_amount": 140000,
+      "payment_type": "Transactor"
+    },
+    "account_age_years": 2
+  },
+  "simulation_results": {
+    "application_id": "APP_8821_BLR",
+    "name": "Aarav Sharma",
+    "score": 92,
+    "status": "APPROVED",
+    "twin_profile": {
+      "liquidity_buffer": 4.5,
+      "spending_elasticity": 0.85,
+      "burn_rate": 18000,
+      "income_volatility": "High (0.35)",
+      "archetype": "High Volatility / High Resilience"
+    },
+    "scenarios": [
+      { "name": "Tech Hiring Freeze", "survival": 100 },
+      { "name": "Rent Spike (+20%)", "survival": 100 },
+      { "name": "GenAI Gig Drought", "survival": 60 },
+      { "name": "Urban Stagflation", "survival": 95 },
+      { "name": "Medical Emergency", "survival": 88 }
+    ],
+    "ai_narrative": "Applicant shows strong resilience. Despite high income volatility (Gig Economy), their high Spending Elasticity (0.85) allows them to absorb the 'Rent Spike' scenario. Warning: Vulnerable to extended 'Income Stops' > 4 months."
+  }
+}

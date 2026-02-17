@@ -1,0 +1,45 @@
+{
+  "application_id": "APP_9932_MUM",
+  "applicant_details": {
+    "name": "Vikram Das",
+    "age": 32,
+    "city_tier": "Tier_1",
+    "job_title": "Senior Marketing Manager",
+    "stated_monthly_income": 150000,
+    "housing_status": "Renting_Solo",
+    "education": "MBA_Tier_1"
+  },
+  "bureau_data": {
+    "credit_score": 750,
+    "total_revolving_limit": 500000,
+    "current_revolving_balance": 450000,
+    "utilization_ratio": 0.90,
+    "total_monthly_emi_obligations": 65000,
+    "payment_history": {
+      "avg_payment_amount": 15000,
+      "payment_type": "Revolver"
+    },
+    "account_age_years": 8
+  },
+  "simulation_results": {
+    "application_id": "APP_9932_MUM",
+    "name": "Vikram Das",
+    "score": 42,
+    "status": "REJECTED",
+    "twin_profile": {
+      "liquidity_buffer": 0.8,
+      "spending_elasticity": 0.20,
+      "burn_rate": 95000,
+      "income_volatility": "Low (0.05)",
+      "archetype": "Low Volatility / Low Resilience"
+    },
+    "scenarios": [
+      { "name": "Tech Hiring Freeze", "survival": 30 },
+      { "name": "Rent Spike (+20%)", "survival": 10 },
+      { "name": "GenAI Gig Drought", "survival": 5 },
+      { "name": "Urban Stagflation", "survival": 40 },
+      { "name": "Medical Emergency", "survival": 0 }
+    ],
+    "ai_narrative": "Applicant is highly fragile. Despite high income, fixed obligations (Rent + EMIs) consume 65% of cash flow. Low Spending Elasticity (0.20) indicates inability to cut lifestyle costs during inflation events."
+  }
+}

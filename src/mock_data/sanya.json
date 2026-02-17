@@ -1,0 +1,45 @@
+{
+  "application_id": "APP_1004_PUN",
+  "applicant_details": {
+    "name": "Sanya Kapoor",
+    "age": 22,
+    "city_tier": "Tier_2",
+    "job_title": "Graduate Trainee",
+    "stated_monthly_income": 35000,
+    "housing_status": "Living_with_Parents",
+    "education": "B.Com_Tier_1"
+  },
+  "bureau_data": {
+    "credit_score": 0,
+    "total_revolving_limit": 0,
+    "current_revolving_balance": 0,
+    "utilization_ratio": 0.0,
+    "total_monthly_emi_obligations": 0,
+    "payment_history": {
+      "avg_payment_amount": 0,
+      "payment_type": "None"
+    },
+    "account_age_years": 0
+  },
+  "simulation_results": {
+    "application_id": "APP_1004_PUN",
+    "name": "Sanya Kapoor",
+    "score": 78,
+    "status": "CONDITIONAL",
+    "twin_profile": {
+      "liquidity_buffer": 3.0,
+      "spending_elasticity": 0.95,
+      "burn_rate": 5000,
+      "income_volatility": "Low (0.10)",
+      "archetype": "Zero History / High Potential"
+    },
+    "scenarios": [
+      { "name": "Tech Hiring Freeze", "survival": 85 },
+      { "name": "Rent Spike (+20%)", "survival": 100 },
+      { "name": "GenAI Gig Drought", "survival": 90 },
+      { "name": "Urban Stagflation", "survival": 95 },
+      { "name": "Medical Emergency", "survival": 50 }
+    ],
+    "ai_narrative": "Strong candidate for micro-credit. Zero history is offset by extremely low fixed costs (living with parents) and high social capital (Tier 1 Degree). Recommended starting limit: ₹50,000."
+  }
+}
