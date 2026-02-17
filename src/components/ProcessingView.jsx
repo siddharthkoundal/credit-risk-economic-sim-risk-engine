@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Cpu } from "lucide-react";
 
 const TERMINAL_MESSAGES = [
-  "> Parsing Bureau Data (XML)...",
+  "> Parsing Bureau Data (JSON)...",
   "> Constructing Digital Twin...",
   "> Inferred Spending Elasticity: 0.85...",
   "> Loading 2026 Scenario Library...",
@@ -36,7 +36,7 @@ export default function ProcessingView() {
 
       {/* Fake Terminal */}
       <div className="w-full max-w-md bg-black/50 border border-slate-700/50 rounded-lg p-4 font-mono text-sm">
-        <div className="space-y-2 max-h-40 overflow-y-auto">
+        <div className="space-y-2 max-h-60 overflow-y-auto">
           {messages.map((msg, idx) => (
             <p key={idx} className="text-green-400">
               {msg}

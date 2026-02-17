@@ -34,29 +34,6 @@ export default function UploadView({ onUploadStart }) {
     return true;
   };
 
-  // Extract simulation results from response
-  const extractSimulationResults = (data) => {
-    // If response has simulation_results (from backend), extract it
-    if (data.simulation_results) {
-      // Normalize scenarios: convert "survival" to "survival_rate"
-      const scenarios = (data.simulation_results.scenarios || []).map(
-        (scenario) => ({
-          name: scenario.name,
-          survival_rate: scenario.survival_rate || scenario.survival || 0,
-          probability: scenario.probability || 0.5,
-        }),
-      );
-
-      return {
-        ...data.simulation_results,
-        scenarios,
-      };
-    }
-
-    // Already have simulation results (flat format from mock)
-    return data;
-  };
-
   const handleFile = async (file) => {
     setError(null);
     setSuccess(null);
@@ -73,12 +50,17 @@ export default function UploadView({ onUploadStart }) {
 
       validateJSON(jsonData);
 
-      // Extract simulation results from response
-      const simulationResults = extractSimulationResults(jsonData);
+      // Construct API payload with ONLY the required fields
+      // DO NOT send simulation_results (keep it in mock data for testing)
+      const apiPayload = {
+        application_id: jsonData.application_id,
+        applicant_details: jsonData.applicant_details,
+        bureau_data: jsonData.bureau_data,
+      };
 
       setSuccess(`✓ Loaded ${file.name}`);
       setTimeout(() => {
-        onUploadStart(simulationResults);
+        onUploadStart(apiPayload);
       }, 500);
     } catch (err) {
       setError(

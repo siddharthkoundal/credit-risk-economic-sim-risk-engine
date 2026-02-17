@@ -34,11 +34,26 @@
       "archetype": "High Volatility / High Resilience"
     },
     "scenarios": [
-      { "name": "Tech Hiring Freeze", "survival": 100 },
-      { "name": "Rent Spike (+20%)", "survival": 100 },
-      { "name": "GenAI Gig Drought", "survival": 60 },
-      { "name": "Urban Stagflation", "survival": 95 },
-      { "name": "Medical Emergency", "survival": 88 }
+      {
+        "name": "Tech Hiring Freeze",
+        "survival": 100
+      },
+      {
+        "name": "Rent Spike (+20%)",
+        "survival": 100
+      },
+      {
+        "name": "GenAI Gig Drought",
+        "survival": 60
+      },
+      {
+        "name": "Urban Stagflation",
+        "survival": 95
+      },
+      {
+        "name": "Medical Emergency",
+        "survival": 88
+      }
     ],
     "ai_narrative": "Applicant shows strong resilience. Despite high income volatility (Gig Economy), their high Spending Elasticity (0.85) allows them to absorb the 'Rent Spike' scenario. Warning: Vulnerable to extended 'Income Stops' > 4 months."
   }

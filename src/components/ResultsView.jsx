@@ -173,7 +173,7 @@ export default function ResultsView({ data }) {
                   color: "#cbd5e1",
                 }}
               />
-              <Bar dataKey="survival_rate" isAnimationActive={true}>
+              <Bar className="bg-none" dataKey="survival_rate" isAnimationActive={true}>
                 {scenarios.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}

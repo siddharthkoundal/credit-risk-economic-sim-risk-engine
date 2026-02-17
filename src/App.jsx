@@ -20,23 +20,50 @@ function App() {
     }
   }, [view]);
 
-  const handleUploadStart = (profileOrData = "aarav") => {
-    let dataToProcess;
-
-    // Check if it's an object (uploaded data) or string (mock profile)
-    if (typeof profileOrData === "object" && profileOrData !== null) {
-      dataToProcess = profileOrData;
-    } else {
-      dataToProcess =
-        profileOrData === "vikram"
-          ? MOCK_API_RESPONSE_VIKRAM
-          : MOCK_API_RESPONSE_AARAV;
-    }
-
-    console.log(dataToProcess);
-
-    setResults(dataToProcess);
+  const handleUploadStart = async (profileOrData = "aarav") => {
     setView("processing");
+
+    try {
+      let dataToProcess;
+
+      // Check if it's an object (uploaded data) or string (mock profile)
+      if (typeof profileOrData === "object" && profileOrData !== null) {
+        // Real API call with uploaded data
+        console.log("Sending to API:", profileOrData);
+
+        const response = await fetch(
+          "https://monte-carlo-api-7y3n.onrender.com/analyze",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(profileOrData),
+          },
+        );
+
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`);
+        }
+
+        dataToProcess = await response.json();
+        console.log("API Response:", dataToProcess);
+      } else {
+        // Mock profile
+        dataToProcess =
+          profileOrData === "vikram"
+            ? MOCK_API_RESPONSE_VIKRAM
+            : MOCK_API_RESPONSE_AARAV;
+      }
+
+      setResults(dataToProcess);
+    } catch (error) {
+      console.error("Error:", error);
+      setResults({
+        error: true,
+        message: error.message || "Failed to process request",
+      });
+    }
   };
 
   const handleReset = () => {
