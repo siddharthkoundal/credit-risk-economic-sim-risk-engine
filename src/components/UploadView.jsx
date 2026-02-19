@@ -153,7 +153,7 @@ export default function UploadView({ onUploadStart }) {
       )}
 
       {/* Demo Data Buttons */}
-      <div className="flex gap-6">
+      {/* <div className="flex gap-6">
         <button
           onClick={() => onUploadStart("aarav")}
           className="px-8 py-3 bg-green-500/20 border border-green-500/50 text-green-400 rounded-lg hover:bg-green-500/30 transition-colors font-medium text-lg cursor-pointer"
@@ -166,7 +166,7 @@ export default function UploadView({ onUploadStart }) {
         >
           Load "Vikram" (Risky)
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
